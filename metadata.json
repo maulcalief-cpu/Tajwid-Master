@@ -1,0 +1,7 @@
+{
+  "name": "Copy of TajwidMaster AI",
+  "description": "A comprehensive Islamic Tajwid learning platform featuring interactive lessons, AI-powered recitation analysis, and gamified quizzes.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
