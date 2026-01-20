@@ -2,7 +2,11 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { QuizLevel } from "../types";
 
-const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+const getAI = () => {
+  const key = process.env.API_KEY;
+  if (!key) throw new Error("API Key is missing");
+  return new GoogleGenAI({ apiKey: key });
+};
 
 export const getAdvancedExplanation = async (ruleName: string) => {
   const ai = getAI();
@@ -51,7 +55,7 @@ export const generateQuiz = async (category: string, level: QuizLevel = 'Dasar')
   });
   
   try {
-    return JSON.parse(response.text);
+    return JSON.parse(response.text || '[]');
   } catch (e) {
     console.error("Failed to parse AI quiz response", e);
     return [];

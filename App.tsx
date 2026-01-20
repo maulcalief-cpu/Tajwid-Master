@@ -13,13 +13,13 @@ import {
   Trophy,
   Mic
 } from 'lucide-react';
-import { AppView, TajwidRule } from './types.ts';
-import { TAJWID_RULES } from './constants.ts';
-import LearnView from './components/LearnView.tsx';
-import QuizRoom from './components/QuizRoom.tsx';
-import ProfileView from './components/ProfileView.tsx';
-import OnboardingView from './components/OnboardingView.tsx';
-import LiveCoach from './components/LiveCoach.tsx';
+import { AppView, TajwidRule } from './types';
+import { TAJWID_RULES } from './constants';
+import LearnView from './components/LearnView';
+import QuizRoom from './components/QuizRoom';
+import ProfileView from './components/ProfileView';
+import OnboardingView from './components/OnboardingView';
+import LiveCoach from './components/LiveCoach';
 
 const App: React.FC = () => {
   const [activeView, setActiveView] = useState<AppView>(AppView.ONBOARDING);
@@ -131,20 +131,25 @@ const App: React.FC = () => {
   );
 
   const renderView = () => {
-    switch (activeView) {
-      case AppView.HOME:
-        return renderHome(true);
-      case AppView.LEARN:
-        if (!selectedRule) return renderHome(false);
-        return <LearnView selectedRule={selectedRule} onSelectRule={setSelectedRule} onStartQuiz={handleStartQuiz} />;
-      case AppView.QUIZ:
-        return <QuizRoom initialCategory={targetQuizCategory} />;
-      case AppView.LIVE_COACH:
-        return <LiveCoach />;
-      case AppView.PROFILE:
-        return <ProfileView />;
-      default:
-        return renderHome(true);
+    try {
+      switch (activeView) {
+        case AppView.HOME:
+          return renderHome(true);
+        case AppView.LEARN:
+          if (!selectedRule) return renderHome(false);
+          return <LearnView selectedRule={selectedRule} onSelectRule={setSelectedRule} onStartQuiz={handleStartQuiz} />;
+        case AppView.QUIZ:
+          return <QuizRoom initialCategory={targetQuizCategory} />;
+        case AppView.LIVE_COACH:
+          return <LiveCoach />;
+        case AppView.PROFILE:
+          return <ProfileView />;
+        default:
+          return renderHome(true);
+      }
+    } catch (err) {
+      console.error("View Render Error:", err);
+      return <div className="p-10 text-center">Gagal memuat halaman. Silakan muat ulang.</div>;
     }
   };
 

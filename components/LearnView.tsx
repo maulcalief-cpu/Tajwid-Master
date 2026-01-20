@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { TajwidRule } from '../types.ts';
-import { getAdvancedExplanation } from '../services/geminiService.ts';
+import { TajwidRule } from '../types';
+import { getAdvancedExplanation } from '../services/geminiService';
 import { Sparkles, Loader2, PlayCircle, Book, Info, AlertTriangle, ArrowLeft, ClipboardCheck } from 'lucide-react';
 
 interface Props {
@@ -41,7 +41,6 @@ const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz })
       </button>
 
       <div className="bg-white rounded-[40px] border border-slate-100 overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)]">
-        {/* Header Materi */}
         <div className="bg-emerald-50/50 p-8 md:p-12 border-b border-emerald-100">
           <div className="flex items-center gap-3 mb-6">
             <span className="text-emerald-600 font-black uppercase text-[10px] tracking-widest px-4 py-1.5 bg-white rounded-full border border-emerald-100 inline-block shadow-sm">
@@ -53,7 +52,6 @@ const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz })
         </div>
 
         <div className="p-8 md:p-12 space-y-12">
-          {/* Section Huruf */}
           <section className="animate-in slide-in-from-bottom-4 duration-500">
             <h3 className="text-2xl font-black mb-8 flex items-center gap-3 text-slate-800">
               <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
@@ -70,7 +68,6 @@ const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz })
             </div>
           </section>
 
-          {/* Info Teknis */}
           <div className="grid md:grid-cols-2 gap-8">
              <section className="bg-blue-50/50 border border-blue-100 p-8 rounded-[32px] animate-in slide-in-from-left-4 duration-500 delay-100">
                 <h3 className="text-lg font-black mb-4 flex items-center gap-2 text-blue-900 uppercase tracking-wider">
@@ -91,7 +88,6 @@ const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz })
              </section>
           </div>
 
-          {/* Contoh Pengucapan */}
           <section className="animate-in slide-in-from-bottom-4 duration-500 delay-200">
             <h3 className="text-2xl font-black mb-8 flex items-center gap-3 text-slate-800">
               <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
@@ -118,17 +114,14 @@ const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz })
             </div>
           </section>
 
-          {/* AI Insights */}
           <section className="bg-slate-900 text-slate-100 rounded-[3rem] p-10 md:p-16 relative overflow-hidden animate-in zoom-in duration-700 delay-300">
             <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/20 rounded-full -mr-24 -mt-24 blur-[100px]"></div>
-            
             <div className="flex items-center justify-between mb-10 relative z-10">
               <h3 className="text-3xl font-black flex items-center gap-4">
                 <Sparkles className="text-amber-400" size={32} /> Analisis AI
               </h3>
               {isLoading && <Loader2 className="animate-spin text-emerald-400" size={28} />}
             </div>
-            
             <div className="prose prose-invert max-w-none prose-emerald relative z-10">
               {isLoading ? (
                 <div className="space-y-6">
@@ -144,7 +137,6 @@ const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz })
             </div>
           </section>
 
-          {/* Test Understanding Section */}
           <section className="pt-10 border-t border-slate-100 text-center animate-in fade-in duration-1000 delay-500">
             <h3 className="text-2xl font-black text-slate-800 mb-4">Sudah paham materi {selectedRule.name}?</h3>
             <p className="text-slate-500 mb-8">Uji pemahamanmu sekarang juga dengan tes singkat.</p>

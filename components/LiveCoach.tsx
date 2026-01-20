@@ -1,7 +1,7 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { GoogleGenAI, Modality, LiveServerMessage } from '@google/genai';
-import { Mic, MicOff, Info, Volume2, Waves } from 'lucide-react';
+import { Mic, MicOff, Info, Volume2 } from 'lucide-react';
 
 // Audio Helpers
 function encode(bytes: Uint8Array) {
@@ -54,7 +54,13 @@ const LiveCoach: React.FC = () => {
 
   const startSession = async () => {
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+      const key = process.env.API_KEY;
+      if (!key) {
+        setStatus("API Key missing. Please check configuration.");
+        return;
+      }
+
+      const ai = new GoogleGenAI({ apiKey: key });
       
       audioContextInRef.current = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
       audioContextOutRef.current = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
@@ -167,9 +173,6 @@ const LiveCoach: React.FC = () => {
             <Mic size={64} className="text-slate-400" />
           )}
         </div>
-        {isActive && (
-          <div className="absolute -inset-4 rounded-full border-2 border-emerald-500 animate-ping opacity-20"></div>
-        )}
       </div>
 
       <div className="flex flex-col items-center gap-4">
@@ -208,7 +211,7 @@ const LiveCoach: React.FC = () => {
 
       <div className="max-w-md bg-amber-50 p-4 rounded-xl border border-amber-100 flex gap-3 text-xs text-amber-800">
         <Info size={16} className="shrink-0" />
-        <p>Fitur ini menggunakan API Live Gemini 2.5. Pastikan koneksi internet Anda stabil untuk pengalaman terbaik. Gunakan headphone untuk menghindari gema suara.</p>
+        <p>Fitur ini menggunakan API Live Gemini 2.5. Pastikan koneksi internet Anda stabil untuk pengalaman terbaik.</p>
       </div>
     </div>
   );
