@@ -20,6 +20,7 @@ export interface TajwidRule {
   howToRead: string;
   commonMistakes: string;
   examples: TajwidExample[];
+  imageUrl?: string; // Menampung URL diagram visual
 }
 
 export interface TajwidExample {

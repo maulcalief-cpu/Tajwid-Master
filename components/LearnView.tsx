@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { TajwidRule } from '../types';
 import { getAdvancedExplanation } from '../services/geminiService';
-import { Sparkles, Loader2, PlayCircle, Book, Info, AlertTriangle, ArrowLeft, ClipboardCheck } from 'lucide-react';
+import { Sparkles, Loader2, PlayCircle, Book, Info, AlertTriangle, ArrowLeft, ClipboardCheck, ImageIcon, Maximize2 } from 'lucide-react';
 
 interface Props {
   selectedRule: TajwidRule;
@@ -13,9 +13,12 @@ interface Props {
 const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz }) => {
   const [aiExplanation, setAiExplanation] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isImageZoomed, setIsImageZoomed] = useState(false);
 
   useEffect(() => {
     handleFetchAIExplanation(selectedRule.name);
+    // Scroll to top when rule changes
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [selectedRule]);
 
   const handleFetchAIExplanation = async (ruleName: string) => {
@@ -52,17 +55,45 @@ const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz })
         </div>
 
         <div className="p-8 md:p-12 space-y-12">
+          {/* Section Diagram Visual (Khusus Makhraj) */}
+          {selectedRule.imageUrl && (
+            <section className="animate-in slide-in-from-bottom-4 duration-500">
+              <h3 className="text-2xl font-black mb-8 flex items-center gap-3 text-slate-800">
+                <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
+                   <ImageIcon className="text-emerald-600" size={22} />
+                </div> 
+                Diagram Visual
+              </h3>
+              <div className="relative group cursor-pointer" onClick={() => setIsImageZoomed(true)}>
+                <div className="w-full aspect-video rounded-[32px] overflow-hidden bg-slate-100 border-4 border-white shadow-xl">
+                  <img 
+                    src={selectedRule.imageUrl} 
+                    alt={`Diagram ${selectedRule.name}`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-[32px] flex items-center justify-center">
+                  <div className="bg-white/90 p-4 rounded-full text-slate-900 shadow-xl scale-90 group-hover:scale-100 transition-transform">
+                    <Maximize2 size={24} />
+                  </div>
+                </div>
+                <p className="mt-4 text-center text-slate-400 text-sm font-medium italic">Klik untuk memperbesar diagram</p>
+              </div>
+            </section>
+          )}
+
+          {/* Section Huruf */}
           <section className="animate-in slide-in-from-bottom-4 duration-500">
             <h3 className="text-2xl font-black mb-8 flex items-center gap-3 text-slate-800">
               <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
                  <Book className="text-emerald-600" size={22} />
               </div> 
-              Huruf Tajwid
+              Huruf Terkait
             </h3>
             <div className="flex flex-wrap gap-4">
               {selectedRule.letters.map((l, i) => (
-                <div key={i} className="w-20 h-20 rounded-[24px] bg-white border-2 border-slate-50 flex items-center justify-center text-4xl font-bold arabic text-emerald-900 shadow-sm hover:border-emerald-500 hover:text-emerald-500 transition-all cursor-default">
-                  {l}
+                <div key={i} className="w-20 h-20 rounded-[24px] bg-white border-2 border-slate-50 flex items-center justify-center text-4xl font-bold arabic text-emerald-900 shadow-sm hover:border-emerald-500 hover:text-emerald-500 transition-all cursor-default group">
+                  <span className="group-hover:scale-125 transition-transform duration-300">{l}</span>
                 </div>
               ))}
             </div>
@@ -73,14 +104,14 @@ const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz })
                 <h3 className="text-lg font-black mb-4 flex items-center gap-2 text-blue-900 uppercase tracking-wider">
                   <Info size={20} /> Cara Membaca
                 </h3>
-                <p className="text-blue-800 leading-relaxed font-medium">
-                  {selectedRule.howToRead}
+                <p className="text-blue-800 leading-relaxed font-medium italic">
+                  "{selectedRule.howToRead}"
                 </p>
              </section>
 
              <section className="bg-amber-50/50 border border-amber-100 p-8 rounded-[32px] animate-in slide-in-from-right-4 duration-500 delay-100">
                 <h3 className="text-lg font-black mb-4 flex items-center gap-2 text-amber-900 uppercase tracking-wider">
-                  <AlertTriangle size={20} /> Tip Belajar
+                  <AlertTriangle size={20} /> Kesalahan Umum
                 </h3>
                 <p className="text-amber-800 leading-relaxed font-medium">
                   {selectedRule.commonMistakes}
@@ -101,7 +132,7 @@ const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz })
                   <div className="flex-1">
                     <div className="arabic text-5xl text-emerald-900 mb-4 leading-loose" dir="rtl">{ex.arabic}</div>
                     <div className="text-slate-400 font-bold text-sm tracking-wide flex items-center gap-2">
-                      <span>{ex.transliteration}</span>
+                      <span className="text-emerald-600">{ex.transliteration}</span>
                       <span className="w-1 h-1 rounded-full bg-slate-300"></span>
                       <span className="font-medium">{ex.translation}</span>
                     </div>
@@ -118,7 +149,7 @@ const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz })
             <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/20 rounded-full -mr-24 -mt-24 blur-[100px]"></div>
             <div className="flex items-center justify-between mb-10 relative z-10">
               <h3 className="text-3xl font-black flex items-center gap-4">
-                <Sparkles className="text-amber-400" size={32} /> Analisis AI
+                <Sparkles className="text-amber-400" size={32} /> Penjelasan Mendalam
               </h3>
               {isLoading && <Loader2 className="animate-spin text-emerald-400" size={28} />}
             </div>
@@ -138,17 +169,39 @@ const LearnView: React.FC<Props> = ({ selectedRule, onSelectRule, onStartQuiz })
           </section>
 
           <section className="pt-10 border-t border-slate-100 text-center animate-in fade-in duration-1000 delay-500">
-            <h3 className="text-2xl font-black text-slate-800 mb-4">Sudah paham materi {selectedRule.name}?</h3>
-            <p className="text-slate-500 mb-8">Uji pemahamanmu sekarang juga dengan tes singkat.</p>
+            <h3 className="text-2xl font-black text-slate-800 mb-4">Uji Pengetahuanmu!</h3>
+            <p className="text-slate-500 mb-8">Tes kemampuanmu tentang {selectedRule.name} dengan soal latihan interaktif.</p>
             <button 
               onClick={() => onStartQuiz?.(selectedRule.category)}
               className="bg-emerald-600 text-white px-10 py-5 rounded-3xl font-black flex items-center gap-3 mx-auto hover:bg-emerald-700 shadow-xl shadow-emerald-100 active:scale-95 transition-all"
             >
-              <ClipboardCheck /> MULAI TES PEMAHAMAN
+              <ClipboardCheck /> MULAI LATIHAN SEKARANG
             </button>
           </section>
         </div>
       </div>
+
+      {/* Image Zoom Modal */}
+      {isImageZoomed && selectedRule.imageUrl && (
+        <div 
+          className="fixed inset-0 z-[60] bg-slate-900/95 backdrop-blur-sm flex items-center justify-center p-6 md:p-12 animate-in fade-in duration-300"
+          onClick={() => setIsImageZoomed(false)}
+        >
+          <div className="relative w-full max-w-5xl h-full flex items-center justify-center">
+            <img 
+              src={selectedRule.imageUrl} 
+              alt={selectedRule.name} 
+              className="max-w-full max-h-full rounded-2xl shadow-2xl animate-in zoom-in duration-500"
+            />
+            <button 
+              className="absolute top-0 right-0 m-4 bg-white/10 hover:bg-white/20 p-4 rounded-full text-white transition-colors"
+              onClick={() => setIsImageZoomed(false)}
+            >
+              <ArrowLeft className="rotate-90" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

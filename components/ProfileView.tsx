@@ -7,12 +7,16 @@ import {
   ChevronRight, 
   Bell, 
   Shield, 
-  LogOut,
+  Book,
   Trophy
 } from 'lucide-react';
 import { TAJWID_RULES } from '../constants';
 
-const ProfileView: React.FC = () => {
+interface ProfileViewProps {
+  onLogout: () => void;
+}
+
+const ProfileView: React.FC<ProfileViewProps> = ({ onLogout }) => {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pb-24">
       <div className="flex flex-col items-center text-center space-y-4 pt-4">
@@ -78,19 +82,30 @@ const ProfileView: React.FC = () => {
       <div className="space-y-4">
         <h3 className="text-lg font-black text-slate-800 px-2">Akun</h3>
         <div className="bg-white rounded-[32px] border border-slate-50 overflow-hidden shadow-sm">
-          {[
-            { label: 'Notifikasi', icon: Bell, color: 'text-blue-500' },
-            { label: 'Keamanan', icon: Shield, color: 'text-indigo-500' },
-            { label: 'Keluar', icon: LogOut, color: 'text-red-500' },
-          ].map((item, i) => (
-            <button key={i} className="w-full flex items-center justify-between p-5 hover:bg-slate-50 border-b border-slate-50 last:border-0">
-              <div className="flex items-center gap-4">
-                <item.icon size={20} className={item.color} />
-                <span className="font-bold text-slate-700">{item.label}</span>
-              </div>
-              <ChevronRight size={18} className="text-slate-300" />
-            </button>
-          ))}
+          <button className="w-full flex items-center justify-between p-5 hover:bg-slate-50 border-b border-slate-50">
+            <div className="flex items-center gap-4">
+              <Bell size={20} className="text-blue-500" />
+              <span className="font-bold text-slate-700">Notifikasi</span>
+            </div>
+            <ChevronRight size={18} className="text-slate-300" />
+          </button>
+          <button className="w-full flex items-center justify-between p-5 hover:bg-slate-50 border-b border-slate-50">
+            <div className="flex items-center gap-4">
+              <Shield size={20} className="text-indigo-500" />
+              <span className="font-bold text-slate-700">Keamanan</span>
+            </div>
+            <ChevronRight size={18} className="text-slate-300" />
+          </button>
+          <button 
+            onClick={onLogout}
+            className="w-full flex items-center justify-between p-5 hover:bg-emerald-50 group transition-colors"
+          >
+            <div className="flex items-center gap-4">
+              <Book size={20} className="text-emerald-500 group-hover:scale-110 transition-transform" />
+              <span className="font-bold text-emerald-600">Halaman Awal (Quran)</span>
+            </div>
+            <ChevronRight size={18} className="text-emerald-200" />
+          </button>
         </div>
       </div>
     </div>
