@@ -10,14 +10,16 @@ import {
   ArrowRight,
   ChevronLeft,
   ClipboardCheck,
-  Trophy
+  Trophy,
+  Mic
 } from 'lucide-react';
-import { AppView, TajwidRule } from './types';
-import { TAJWID_RULES } from './constants';
-import LearnView from './components/LearnView';
-import QuizRoom from './components/QuizRoom';
-import ProfileView from './components/ProfileView';
-import OnboardingView from './components/OnboardingView';
+import { AppView, TajwidRule } from './types.ts';
+import { TAJWID_RULES } from './constants.ts';
+import LearnView from './components/LearnView.tsx';
+import QuizRoom from './components/QuizRoom.tsx';
+import ProfileView from './components/ProfileView.tsx';
+import OnboardingView from './components/OnboardingView.tsx';
+import LiveCoach from './components/LiveCoach.tsx';
 
 const App: React.FC = () => {
   const [activeView, setActiveView] = useState<AppView>(AppView.ONBOARDING);
@@ -86,13 +88,13 @@ const App: React.FC = () => {
             <Trophy size={120} />
           </div>
           <div className="relative z-10 max-w-xs">
-            <h2 className="text-2xl font-black mb-2">Tes Kemampuan</h2>
-            <p className="text-emerald-50 mb-6 text-sm opacity-90">Uji pemahaman tajwidmu dengan soal-soal interaktif AI.</p>
+            <h2 className="text-2xl font-black mb-2">Guru AI Tajwid</h2>
+            <p className="text-emerald-50 mb-6 text-sm opacity-90">Praktik suara langsung dan dapatkan feedback tajwid seketika.</p>
             <button 
-              onClick={() => handleStartQuiz('Nun Sukun')}
+              onClick={() => setActiveView(AppView.LIVE_COACH)}
               className="bg-white text-emerald-600 px-6 py-3 rounded-2xl font-black text-sm hover:bg-emerald-50 transition-colors shadow-lg"
             >
-              MULAI UJIAN
+              COBA GURU AI
             </button>
           </div>
         </div>
@@ -138,6 +140,8 @@ const App: React.FC = () => {
       case AppView.QUIZ:
         return <QuizRoom initialCategory={targetQuizCategory} />;
       case AppView.LIVE_COACH:
+        return <LiveCoach />;
+      case AppView.PROFILE:
         return <ProfileView />;
       default:
         return renderHome(true);
@@ -162,8 +166,13 @@ const App: React.FC = () => {
           </div>
           <h1 className="text-2xl font-black text-slate-800">TajwidMaster</h1>
         </div>
-        <button className="w-11 h-11 bg-slate-50 text-emerald-600 rounded-full flex items-center justify-center border border-slate-100">
-          <Sparkles size={20} />
+        <button 
+          onClick={() => setActiveView(AppView.LIVE_COACH)}
+          className={`w-11 h-11 rounded-full flex items-center justify-center border transition-all ${
+            activeView === AppView.LIVE_COACH ? 'bg-emerald-600 text-white' : 'bg-slate-50 text-emerald-600 border-slate-100'
+          }`}
+        >
+          <Mic size={20} />
         </button>
       </header>
 
@@ -175,8 +184,8 @@ const App: React.FC = () => {
         {[
           { id: AppView.HOME, icon: Home, label: 'BERANDA' },
           { id: AppView.LEARN, icon: BookOpen, label: 'MATERI' },
-          { id: AppView.QUIZ, icon: ClipboardCheck, label: 'UJIAN' },
-          { id: AppView.LIVE_COACH, icon: User, label: 'PROFIL' },
+          { id: AppView.LIVE_COACH, icon: Mic, label: 'GURU AI' },
+          { id: AppView.PROFILE, icon: User, label: 'PROFIL' },
         ].map((item) => {
           const isActive = activeView === item.id;
           return (

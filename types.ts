@@ -4,7 +4,8 @@ export enum AppView {
   HOME = 'HOME',
   LEARN = 'LEARN',
   QUIZ = 'QUIZ',
-  LIVE_COACH = 'LIVE_COACH'
+  LIVE_COACH = 'LIVE_COACH',
+  PROFILE = 'PROFILE'
 }
 
 export type QuizLevel = 'Dasar' | 'Menengah' | 'Mahir';

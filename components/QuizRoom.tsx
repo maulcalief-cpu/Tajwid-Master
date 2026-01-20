@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { generateQuiz } from '../services/geminiService';
-import { QuizQuestion, QuizLevel } from '../types';
-import { TAJWID_RULES } from '../constants';
+import { generateQuiz } from '../services/geminiService.ts';
+import { QuizQuestion, QuizLevel } from '../types.ts';
+import { TAJWID_RULES } from '../constants.ts';
 import { 
   Loader2, 
   CheckCircle2, 
@@ -76,7 +76,7 @@ const QuizRoom: React.FC<QuizRoomProps> = ({ initialCategory }) => {
     );
   }
 
-  // Step 2: Persiapan Materi (Sesuai Permintaan: Detail materi di Ujian)
+  // Step 2: Persiapan Materi
   if (!quizStarted && step === 'prep') {
     const relevantRule = TAJWID_RULES.find(r => r.category === selectedCategory) || TAJWID_RULES[0];
     return (

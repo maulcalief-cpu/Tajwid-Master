@@ -11,7 +11,7 @@ import {
   Trophy,
   Info
 } from 'lucide-react';
-import { TAJWID_RULES } from '../constants';
+import { TAJWID_RULES } from '../constants.ts';
 
 const ProfileView: React.FC = () => {
   return (

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { TajwidRule } from '../types';
-import { getAdvancedExplanation } from '../services/geminiService';
+import { TajwidRule } from '../types.ts';
+import { getAdvancedExplanation } from '../services/geminiService.ts';
 import { Sparkles, Loader2, PlayCircle, Book, Info, AlertTriangle, ArrowLeft, ClipboardCheck } from 'lucide-react';
 
 interface Props {
