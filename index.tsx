@@ -8,10 +8,14 @@ const container = document.getElementById('root');
 if (!container) {
   console.error("Root element not found");
 } else {
-  const root = createRoot(container);
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
+  try {
+    const root = createRoot(container);
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+  } catch (error) {
+    console.error("Critical rendering error:", error);
+  }
 }
