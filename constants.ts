@@ -47,6 +47,20 @@ export const TAJWID_RULES: TajwidRule[] = [
     ]
   },
   {
+    id: 'idgham-bilaghunnah',
+    name: 'Idgham Bila Ghunnah',
+    category: 'Nun Sukun',
+    description: 'Meleburkan Nun sukun ke huruf berikutnya tanpa suara dengung.',
+    explanation: 'Bila Ghunnah berarti tanpa dengung. Terjadi jika Nun sukun atau Tanwin bertemu huruf Lam (ل) atau Ra (ر). Bunyi Nun harus hilang sepenuhnya dan langsung masuk ke huruf berikutnya.',
+    letters: ['ل', 'ر'],
+    howToRead: 'Masukkan bunyi Nun ke dalam huruf Lam atau Ra dengan tegas tanpa menahan suara di hidung.',
+    commonMistakes: 'Seringkali pembaca masih menahan atau mendengungkan suara saat bertemu Ra, yang seharusnya dibaca cepat.',
+    examples: [
+      { arabic: 'مِنْ لَدُنْكَ', transliteration: 'Mil-ladunka', translation: 'Dari sisi-Mu', rule_applied: 'Nun Sukun bertemu Lam' },
+      { arabic: 'غَفُورٌ رَحِيمٌ', transliteration: 'Ghafuurur-rahiim', translation: 'Maha Pengampun lagi Maha Penyayang', rule_applied: 'Tanwin bertemu Ra' }
+    ]
+  },
+  {
     id: 'iqlab',
     name: 'Iqlab',
     category: 'Nun Sukun',
@@ -88,6 +102,62 @@ export const TAJWID_RULES: TajwidRule[] = [
       { arabic: 'لَهُمْ فِيهَا', transliteration: 'Lahum fiihaa', translation: 'Bagi mereka di dalamnya', rule_applied: 'Mim sukun bertemu Fa (Wajib Jelas)' }
     ]
   },
+  {
+    id: 'ikhfa-syafawi',
+    name: 'Ikhfa Syafawi',
+    category: 'Mim Sukun',
+    description: 'Menyamarkan Mim sukun saat bertemu huruf Ba.',
+    explanation: 'Terjadi apabila Mim sukun bertemu dengan huruf Ba (ب). Bunyi Mim disamarkan dengan dengungan yang halus di bibir.',
+    letters: ['ب'],
+    howToRead: 'Pertemukan kedua bibir dengan ringan (tidak ditekan) dan tahan suara dengung dari hidung selama 2 harakat.',
+    commonMistakes: 'Membaca Mim secara jelas (seperti Izhar) atau menutup bibir terlalu kuat.',
+    examples: [
+      { arabic: 'تَرْمِيهِمْ بِحِجَارَةٍ', transliteration: 'Tarmiihim-bihijaaratin', translation: 'Melempari mereka dengan batu', rule_applied: 'Mim sukun bertemu Ba' }
+    ]
+  },
+  {
+    id: 'idgham-mimi',
+    name: 'Idgham Mimi / Mutamathilain',
+    category: 'Mim Sukun',
+    description: 'Meleburkan Mim sukun ke huruf Mim berikutnya.',
+    explanation: 'Terjadi jika Mim sukun bertemu dengan sesama huruf Mim (م). Disebut juga Idgham Mutamathilain karena bertemunya dua huruf yang sama makhraj dan sifatnya.',
+    letters: ['م'],
+    howToRead: 'Masukkan Mim pertama ke Mim kedua sehingga menjadi satu Mim bertasydid, lalu tahan dengungan selama 2 harakat.',
+    commonMistakes: 'Tidak menahan dengung (langsung dilepas) sehingga hukum ghunnah-nya hilang.',
+    examples: [
+      { arabic: 'لَهُمْ مَا يَشَاءُونَ', transliteration: 'Lahum-maa yasyaa-uun', translation: 'Bagi mereka apa yang mereka kehendaki', rule_applied: 'Mim sukun bertemu Mim' }
+    ]
+  },
+
+  // --- ALIF LAM ---
+  {
+    id: 'alif-lam-qomariyah',
+    name: 'Alif Lam Qomariyah',
+    category: 'Alif Lam',
+    description: 'Membaca Alif Lam secara jelas (Izhar).',
+    explanation: 'Disebut Qomariyah (seperti bulan) karena Lam-nya tetap terlihat/terdengar jelas saat bertemu 14 huruf tertentu.',
+    letters: ['ا', 'ب', 'ج', 'ح', 'خ', 'ع', 'غ', 'ف', 'ق', 'ك', 'م', 'و', 'هـ', 'ي'],
+    howToRead: 'Bunyi "L" pada Alif Lam harus diucapkan secara jelas dengan ujung lidah menyentuh gusi atas.',
+    commonMistakes: 'Menghilangkan bunyi L atau memantulkannya (qalqalah) secara tidak sengaja.',
+    examples: [
+      { arabic: 'الْقَمَرُ', transliteration: 'Al-Qamaru', translation: 'Bulan', rule_applied: 'Izhar Qomariyah' },
+      { arabic: 'الْحَمْدُ', transliteration: 'Al-Hamdu', translation: 'Segala Puji', rule_applied: 'Izhar Qomariyah' }
+    ]
+  },
+  {
+    id: 'alif-lam-syamsiyah',
+    name: 'Alif Lam Syamsiyah',
+    category: 'Alif Lam',
+    description: 'Meleburkan bunyi Alif Lam ke huruf berikutnya.',
+    explanation: 'Disebut Syamsiyah (seperti matahari) karena bunyi Lam hilang dan langsung masuk (Idgham) ke huruf berikutnya yang bertasydid.',
+    letters: ['ت', 'ث', 'د', 'ذ', 'ر', 'ز', 'س', 'ش', 'ص', 'ض', 'ط', 'ظ', 'ل', 'ن'],
+    howToRead: 'Lewati bunyi Lam dan langsung tekan ke huruf setelahnya seolah-olah huruf tersebut bertasydid.',
+    commonMistakes: 'Tetap membunyikan "L" sehingga terdengar kaku.',
+    examples: [
+      { arabic: 'الشَّمْسُ', transliteration: 'Asy-Syamsu', translation: 'Matahari', rule_applied: 'Idgham Syamsiyah' },
+      { arabic: 'الرَّحْمَنُ', transliteration: 'Ar-Rahmanu', translation: 'Maha Pengasih', rule_applied: 'Idgham Syamsiyah' }
+    ]
+  },
 
   // --- QALQALAH ---
   {
@@ -107,6 +177,46 @@ export const TAJWID_RULES: TajwidRule[] = [
 
   // --- HUKUM MAD ---
   {
+    id: 'mad-thabii',
+    name: 'Mad Thabi\'i / Asli',
+    category: 'Mad',
+    description: 'Hukum mad dasar dengan panjang 2 harakat.',
+    explanation: 'Terjadi jika huruf Alif didahului Fathah, Wawu sukun didahului Dhammah, atau Ya sukun didahului Kasrah.',
+    letters: ['ا', 'و', 'ي'],
+    howToRead: 'Panjangkan suara huruf tersebut tepat selama 2 harakat (1 alif), tidak boleh lebih dan tidak boleh kurang.',
+    commonMistakes: 'Membaca terlalu panjang atau justru terlalu pendek seperti huruf biasa.',
+    examples: [
+      { arabic: 'قَالَ', transliteration: 'Qaala', translation: 'Dia berkata', rule_applied: 'Alif didahului Fathah' },
+      { arabic: 'يَقُولُ', transliteration: 'Yaqulu', translation: 'Dia sedang berkata', rule_applied: 'Wawu didahului Dhammah' }
+    ]
+  },
+  {
+    id: 'mad-wajib-muttasil',
+    name: 'Mad Wajib Muttasil',
+    category: 'Mad',
+    description: 'Mad Thabi\'i bertemu Hamzah dalam satu kata.',
+    explanation: 'Disebut Muttasil karena Mad dan Hamzah berada dalam satu kata (sambung). Merupakan mad yang wajib dibaca panjang.',
+    letters: ['Mad + ء (Satu Kata)'],
+    howToRead: 'Wajib dipanjangkan selama 4 atau 5 harakat secara konsisten.',
+    commonMistakes: 'Membaca pendek hanya 2 harakat karena mengira Mad Thabi\'i biasa.',
+    examples: [
+      { arabic: 'السَّمَاءِ', transliteration: 'As-Samaaa-i', translation: 'Langit', rule_applied: 'Mad + Hamzah (1 Kata)' }
+    ]
+  },
+  {
+    id: 'mad-jaiz-munfasil',
+    name: 'Mad Jaiz Munfasil',
+    category: 'Mad',
+    description: 'Mad Thabi\'i bertemu Hamzah di lain kata.',
+    explanation: 'Disebut Munfasil karena Mad dan Hamzah terpisah kata. Jaiz berarti boleh dibaca pendek (2 harakat) atau panjang (4-5 harakat).',
+    letters: ['Mad + ء (Beda Kata)'],
+    howToRead: 'Boleh dibaca 2, 4, atau 5 harakat. Jika sudah memilih satu panjang, gunakan secara konsisten dalam tilawah tersebut.',
+    commonMistakes: 'Tidak konsisten dalam memilih panjang harakat dalam satu sesi bacaan.',
+    examples: [
+      { arabic: 'إِنَّا أَنْزَلْنَاهُ', transliteration: 'Innaaa-anzalnahu', translation: 'Sesungguhnya Kami menurunkannya', rule_applied: 'Mad + Hamzah (Beda Kata)' }
+    ]
+  },
+  {
     id: 'mad-arid-lissukun',
     name: 'Mad Arid Lissukun',
     category: 'Mad',
@@ -124,7 +234,7 @@ export const TAJWID_RULES: TajwidRule[] = [
     name: 'Mad Lazim Kilmi',
     category: 'Mad',
     description: 'Mad Thabi\'i bertemu tasydid dalam satu kata.',
-    explanation: 'Terbagi menjadi Muthaqqal (berat/ada tasydid) dan Mukhaffaf (ringan). Merupakan tingkatan Mad yang paling panjang.',
+    explanation: 'Terjadi apabila ada Mad Thabi\'i bertemu dengan huruf bertasydid dalam satu kata. Ini adalah tingkatan Mad paling berat (Muthaqqal).',
     letters: ['Huruf bertasydid setelah Mad'],
     howToRead: 'Wajib dibaca sepanjang 6 harakat (3 alif) tanpa boleh kurang sedikitpun.',
     commonMistakes: 'Membaca kurang dari 6 harakat karena nafas yang tidak cukup.',
