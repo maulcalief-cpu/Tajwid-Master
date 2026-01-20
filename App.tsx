@@ -9,7 +9,6 @@ import {
   Sparkles,
   ArrowRight,
   ChevronLeft,
-  ClipboardCheck,
   Trophy,
   Mic
 } from 'lucide-react';
@@ -131,25 +130,20 @@ const App: React.FC = () => {
   );
 
   const renderView = () => {
-    try {
-      switch (activeView) {
-        case AppView.HOME:
-          return renderHome(true);
-        case AppView.LEARN:
-          if (!selectedRule) return renderHome(false);
-          return <LearnView selectedRule={selectedRule} onSelectRule={setSelectedRule} onStartQuiz={handleStartQuiz} />;
-        case AppView.QUIZ:
-          return <QuizRoom initialCategory={targetQuizCategory} />;
-        case AppView.LIVE_COACH:
-          return <LiveCoach />;
-        case AppView.PROFILE:
-          return <ProfileView />;
-        default:
-          return renderHome(true);
-      }
-    } catch (err) {
-      console.error("View Render Error:", err);
-      return <div className="p-10 text-center">Gagal memuat halaman. Silakan muat ulang.</div>;
+    switch (activeView) {
+      case AppView.HOME:
+        return renderHome(true);
+      case AppView.LEARN:
+        if (!selectedRule) return renderHome(false);
+        return <LearnView selectedRule={selectedRule} onSelectRule={setSelectedRule} onStartQuiz={handleStartQuiz} />;
+      case AppView.QUIZ:
+        return <QuizRoom initialCategory={targetQuizCategory} />;
+      case AppView.LIVE_COACH:
+        return <LiveCoach />;
+      case AppView.PROFILE:
+        return <ProfileView />;
+      default:
+        return renderHome(true);
     }
   };
 

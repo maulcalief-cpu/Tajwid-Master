@@ -1,19 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import { generateQuiz } from '../services/geminiService.ts';
-import { QuizQuestion, QuizLevel } from '../types.ts';
-import { TAJWID_RULES } from '../constants.ts';
+import { generateQuiz } from '../services/geminiService';
+import { QuizQuestion, QuizLevel } from '../types';
+import { TAJWID_RULES } from '../constants';
 import { 
   Loader2, 
-  CheckCircle2, 
-  XCircle, 
-  RefreshCw, 
   ClipboardCheck, 
   ArrowLeft, 
   ChevronRight,
-  ShieldCheck,
-  Zap,
-  Flame,
   BookOpen
 } from 'lucide-react';
 
@@ -57,7 +51,6 @@ const QuizRoom: React.FC<QuizRoomProps> = ({ initialCategory }) => {
     }
   };
 
-  // Step 1: Kategori
   if (!quizStarted && step === 'category') {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-8 px-4">
@@ -76,7 +69,6 @@ const QuizRoom: React.FC<QuizRoomProps> = ({ initialCategory }) => {
     );
   }
 
-  // Step 2: Persiapan Materi
   if (!quizStarted && step === 'prep') {
     const relevantRule = TAJWID_RULES.find(r => r.category === selectedCategory) || TAJWID_RULES[0];
     return (
@@ -102,7 +94,6 @@ const QuizRoom: React.FC<QuizRoomProps> = ({ initialCategory }) => {
     );
   }
 
-  // Step 3: Level
   if (!quizStarted && step === 'level') {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-6 px-4">

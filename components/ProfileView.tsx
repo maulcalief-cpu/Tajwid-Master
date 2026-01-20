@@ -8,15 +8,13 @@ import {
   Bell, 
   Shield, 
   LogOut,
-  Trophy,
-  Info
+  Trophy
 } from 'lucide-react';
-import { TAJWID_RULES } from '../constants.ts';
+import { TAJWID_RULES } from '../constants';
 
 const ProfileView: React.FC = () => {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pb-24">
-      {/* Header Profil */}
       <div className="flex flex-col items-center text-center space-y-4 pt-4">
         <div className="relative">
           <div className="w-32 h-32 rounded-[40px] bg-emerald-100 p-1">
@@ -34,7 +32,6 @@ const ProfileView: React.FC = () => {
         </div>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white p-6 rounded-[28px] border border-slate-50 shadow-sm flex items-center gap-4">
           <div className="w-12 h-12 bg-orange-50 text-orange-500 rounded-2xl flex items-center justify-center">
@@ -56,7 +53,6 @@ const ProfileView: React.FC = () => {
         </div>
       </div>
 
-      {/* Materi Detail di Profil */}
       <div className="space-y-4">
         <h3 className="text-lg font-black text-slate-800 px-2 flex items-center gap-2">
           <BookOpen size={20} className="text-emerald-500" /> Referensi Materi Tajwid
@@ -79,7 +75,6 @@ const ProfileView: React.FC = () => {
         </div>
       </div>
 
-      {/* Pengaturan Lainnya */}
       <div className="space-y-4">
         <h3 className="text-lg font-black text-slate-800 px-2">Akun</h3>
         <div className="bg-white rounded-[32px] border border-slate-50 overflow-hidden shadow-sm">
